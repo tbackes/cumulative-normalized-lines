@@ -1,0 +1,24 @@
+{
+  "name": "Continuous Error Bars",
+  "organization": "tbackes",
+  "description": "Line plot with continuous error bars, generated using plotly.js.",
+  "logoUrl": "https://logo",
+  "organizationUrl": "https://url",
+  "supportUrl": "https://url",
+  "privacyPolicyUrl": "https://url",
+  "termsOfServiceUrl": "https://url",
+  "packageUrl": "https://url",
+  "devMode": false,
+  "components": [
+    {
+      "name": "continuous-error-bars",
+      "description": "Line plot with continuous error bars.",
+      "iconUrl": "https://url",
+      "resource": {
+        "js": "gs://tbackes_viz/continuous-error-bars/index.js",
+        "config": "gs://tbackes_viz/continuous-error-bars/index.json",
+        "css": "gs://tbackes_viz/continuous-error-bars/index.css"
+      }
+    }
+  ]
+}
