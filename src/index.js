@@ -74,6 +74,33 @@ Date.prototype.addDays = function(days) {
     return new Date(this.valueOf()+(24*60*60*days))
 }
 
+const nullToZero = (x) => {
+  return isNumeric(x)
+    ? x
+    : 0;
+}
+
+const cumulativeNormalize = (x) => {
+  var cumulativeX = x.map((sum => value => sum += nullToZero(value))(0));
+  var totalX = Math.max.apply(Math, cumulativeX);
+
+  let i;
+  for (i=0; i<x.length; i++) {
+    cumulativeX[i] /= totalX;
+  }
+  return cumulativeX
+}
+
+const cumulativeNormalizeGroup = (x,y) => {
+  var cumulativeX = x.map((sum => value => sum += nullToZero(value))(0));
+
+  let i;
+  for (i=0; i<x.length; i++) {
+    cumulativeX[i] /= y;
+  }
+  return cumulativeX
+}
+
 const drawViz = message => {
 
   // set margins + canvas size
@@ -107,7 +134,6 @@ const drawViz = message => {
   const yAxisMax = styleVal(message, 'yMax');
   const yLabel = styleVal(message, 'yLabel');
   const metricFmt = styleVal(message, 'metricFormatString');
-  const ciFmt = styleVal(message, 'ciFormatString');
 
   // Gather data for x-axis
   // -------------------------
@@ -115,42 +141,47 @@ const drawViz = message => {
     ? message.tables.DEFAULT.map(d => toDate(d.dimension[0])) 
     : message.tables.DEFAULT.map(d => d.dimension[0]);
 
+  // Loop through metric groups to get normalization constant for each metric group
+  let j;
+  var metricGroupNormalizationValues = {};
+  for (j=0; j<message.tables.DEFAULT[0].metric.length; j++){
+    const m =  styleVal(message, 'metricGroup'+(j+1));
+    const value = message.tables.DEFAULT.map(d => Number(d.metric[j])).reduce((partialSum, a) => partialSum + nullToZero(a), 0);
+
+    // console.log("j: "+'metricGroup'+(j+1)+'; '+value)
+    metricGroupNormalizationValues[m] = metricGroupNormalizationValues.hasOwnProperty(m)
+      ? Math.max(metricGroupNormalizationValues[m], value)
+      : value;
+  }
+
+  // console.log("j: "+JSON.stringify(metricGroupNormalizationValues, null, '  '));
+
   // loop through metrics and add traces
   // -------------------------
-  const num_ci_metrics = 
-    Math.min(
-      message.tables.DEFAULT[0].metric_lower.length, 
-      message.tables.DEFAULT[0].metric_upper.length);
   let data = []
   let i;
   for (i=0; i<message.tables.DEFAULT[0].metric.length; i++){
     // console.log('i: '+i)
+    // console.log("Input: " + JSON.stringify(message.tables.DEFAULT.map(d => d.metric[i]), null, '  '));
+    // console.log("Trace: " + JSON.stringify(cumulativeNormalizeGroup(message.tables.DEFAULT.map(d => Number(d.metric[i])),
+                                  // metricGroupNormalizationValues[styleVal(message, 'metricGroup'+(i+1))]), null, '  '));
 
     // Gather all style parameters
     // series properties
     const metricLineWeight =  styleVal(message, 'metricLineWeight'+(i+1));
     const metricLineColor =  themeColor(message, 'metricColor'+(i+1), 'themeSeriesColor', i);
-    const metricFillColor =  hex_to_rgba_str(
-      themeColor(message, 'metricFillColor'+(i+1), 'themeSeriesColor', i),
-      styleVal(message, 'metricFillOpacity'+(i+1)));
     const metricShowPoints =  styleVal(message, 'metricShowPoints'+(i+1));
-    const metricHideCI =  styleVal(message, 'metricHideCI'+(i+1));
 
     // Design hovertemplate
-    let customdata = message.tables.DEFAULT.map(d => [d.metric_lower[i], d.metric_upper[i]]); 
-    let hovertemplate = `<b>%{y:${metricFmt}}</b><i> (%{customdata[0]:${ciFmt}} - %{customdata[1]:${ciFmt}})</i>`;
-
-    // Don't include CI in hovertemplate if no data was specified
-    if (i >= num_ci_metrics){
-      hovertemplate = `<b>%{y:${metricFmt}</b>`;
-      customdata = message.tables.DEFAULT.map(d => [null, null])
-    }
+    let hovertemplate = `<b>%{y:${metricFmt}}</b>`;
+    let customdata = message.tables.DEFAULT.map(d => [null, null])
 
     // trace for metric trend line
     const trace_metric = {
       x: xData,
-      y: message.tables.DEFAULT.map(d => d.metric[i]),
-      customdata,
+      y: cumulativeNormalizeGroup(message.tables.DEFAULT.map(d => Number(d.metric[i])),
+                                  metricGroupNormalizationValues[styleVal(message, 'metricGroup'+(i+1))]),
+      customdata:customdata,
       line: {
         color: metricLineColor,
         width: metricLineWeight
@@ -164,44 +195,6 @@ const drawViz = message => {
 
     data.push(trace_metric);
 
-    // Only add CI trend-lines if they are present in the data
-  // -------------------------
-    if (i < num_ci_metrics) {
-      // trace for lower bound of CI
-      const trace_lower = {
-        x: xData,
-        y: message.tables.DEFAULT.map(d => d.metric_lower[i]),
-        line: {width: 1}, 
-        marker: {color: metricFillColor}, 
-        mode: "lines", 
-        name: message.fields.metric_lower[i].name, 
-        type: "scatter",
-        legendgroup: 'ci'+i,
-        hoverinfo: 'skip', 
-        visible: (metricHideCI)? 'legendonly' : true,
-        showlegend: false
-      };
-
-      // trace for upper bound of CI
-      const trace_upper = {
-        x: xData,
-        y: message.tables.DEFAULT.map(d => d.metric_upper[i]),
-        line: {width: 1}, 
-        fill: "tonexty", 
-        fillcolor: metricFillColor, 
-        marker: {color: metricFillColor}, 
-        line: {color: metricFillColor}, 
-        mode: "lines", 
-        name: message.fields.metric_upper[i].name, 
-        type: "scatter",
-        legendgroup: 'ci'+i,
-        hoverinfo: 'skip', 
-        visible: (metricHideCI)? 'legendonly' : true,
-        showlegend: true
-      };
-
-      data.push(trace_lower, trace_upper);
-    }
   }
 
   // Chart Titles
@@ -216,11 +209,11 @@ const drawViz = message => {
     yAxisLayout.range = 'auto'
   }
   else if (!isNumeric(yAxisMin)){
-    const minValue = Math.min.apply(Math, message.tables.DEFAULT.map(function(d) {return Math.min(...d.metric_lower)}));
+    const minValue = Math.min.apply(Math, message.tables.DEFAULT.map(function(d) {return Math.min(...d.metric)}));
     yAxisLayout.range = [0.9*minValue, yAxisMax];
   }
   else if (!isNumeric(yAxisMax)){
-    const maxValue = Math.max.apply(Math, message.tables.DEFAULT.map(function(d) {return Math.max(...d.metric_upper)}));
+    const maxValue = Math.max.apply(Math, message.tables.DEFAULT.map(function(d) {return Math.max(...d.metric)}));
     yAxisLayout.range = [yAxisMin, 1.1*maxValue];
   }
   else{
@@ -233,6 +226,7 @@ const drawViz = message => {
     yaxis: yAxisLayout,
     xaxis: xAxisLayout,
     title: chartTitleLayout,
+    hovermode: 'x'
   };
 
   plotly.newPlot(myDiv, data, layout);

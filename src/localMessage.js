@@ -6,13 +6,7 @@ export const message = {
           1
         ],
         "metric": [
-          1.5, 4.5, 3
-        ],
-        "metric_lower": [
-          0.5, 4.2, 1
-        ],
-        "metric_upper": [
-          2, 5, 4
+          "1.5", "4.5", "3"
         ]
       },
       {
@@ -21,12 +15,6 @@ export const message = {
         ],
         "metric": [
           1.7, 2.5, 3.4
-        ],
-        "metric_lower": [
-          1, 1.5, 2
-        ],
-        "metric_upper": [
-          3, 3.1, 6
         ]
       },
       {
@@ -49,12 +37,6 @@ export const message = {
         ],
         "metric": [
           1.6
-        ],
-        "metric_lower": [
-          1.2
-        ],
-        "metric_upper": [
-          4
         ]
       },
       {
@@ -63,12 +45,6 @@ export const message = {
         ],
         "metric": [
           1.4
-        ],
-        "metric_lower": [
-          0.9
-        ],
-        "metric_upper": [
-          3.5
         ]
       }
     ]
@@ -102,46 +78,6 @@ export const message = {
         "concept": "METRIC"
       }
     ],
-    "metric_lower": [
-      {
-        "id": "qt_4x3c3nqogc",
-        "name": "ci_lower",
-        "type": "NUMBER",
-        "concept": "METRIC"
-      },
-      {
-        "id": "qt_zv235h1jgc",
-        "name": "Metric 2 - 95% CI (Lower)",
-        "type": "NUMBER",
-        "concept": "METRIC"
-      },
-      {
-        "id": "qt_zv23567jgc",
-        "name": "Metric 3 - 95% CI (Lower)",
-        "type": "NUMBER",
-        "concept": "METRIC"
-      }
-    ],
-    "metric_upper": [
-      {
-        "id": "qt_ec9ldoqogc",
-        "name": "ci_upper",
-        "type": "NUMBER",
-        "concept": "METRIC"
-      },
-      {
-        "id": "qt_zv23444jgc",
-        "name": "Metric 2 - 95% CI (Upper)",
-        "type": "NUMBER",
-        "concept": "METRIC"
-      },
-      {
-        "id": "qt_zv235h55gc",
-        "name": "Metric 3 - 95% CI (Lower)",
-        "type": "NUMBER",
-        "concept": "METRIC"
-      }
-    ]
   },
   "style": {
     "chartTitle": {
@@ -172,9 +108,17 @@ export const message = {
       "value": ".3%",
       "defaultValue": ",.0f"
     },
-    "ciFormatString": {
-      "value": ",.0f",
-      "defaultValue": ",.0f"
+    "metricGroup1": {
+      "value": "Group1",
+      "defaultValue": "Group1"
+    },
+    "metricGroup2": {
+      "value": "Group1",
+      "defaultValue": "Group2"
+    },
+    "metricGroup3": {
+      "value": "Group3",
+      "defaultValue": "Group3"
     },
     "metricLineWeight1": {
       "value": 2,
@@ -183,14 +127,6 @@ export const message = {
     "metricColor1": {
       "value": {
         "color": null
-      },
-      "defaultValue": {
-        "color": "#0072f0"
-      }
-    },
-    "metricFillColor1": {
-      "value": {
-        "color": "#0072f0"
       },
       "defaultValue": {
         "color": "#0072f0"
@@ -205,14 +141,6 @@ export const message = {
       "defaultValue": 2
     },
     "metricColor2": {
-      "value": {
-        "color": "#00b6cb"
-      },
-      "defaultValue": {
-        "color": "#00b6cb"
-      }
-    },
-    "metricFillColor2": {
       "value": {
         "color": "#00b6cb"
       },
@@ -236,53 +164,9 @@ export const message = {
         "color": "#f10096"
       }
     },
-    "metricFillColor3": {
-      "value": {
-        "color": "#f66d00"
-      },
-      "defaultValue": {
-        "color": "#f10096"
-      }
-    },
     "metricShowPoints3": {
       "value": true,
       "defaultValue": true
-    },
-    "metricHideCI1": {
-      "value": true,
-      "defaultValue": false
-    },
-    "metricHideCI2": {
-      "value": false,
-      "defaultValue": false
-    },
-    "metricHideCI3": {
-      "value": false,
-      "defaultValue": false
-    },
-    "metricFillOpacity1": {
-      "value": 0.3,
-      "defaultValue": 0.1
-    },
-    "metricFillOpacity2": {
-      "value": 0.2,
-      "defaultValue": 0.1
-    },
-    "metricFillOpacity3": {
-      "value": 0.5,
-      "defaultValue": 0.1
-    },
-    "errorBarWidth1": {
-      "value": 1,
-      "defaultValue": 0.1
-    },
-    "errorBarWidth2": {
-      "value": 2,
-      "defaultValue": 0.1
-    },
-    "errorBarWidth3": {
-      "value": 3,
-      "defaultValue": 0.1
     }
   },
   "theme": {

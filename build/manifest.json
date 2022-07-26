@@ -1,23 +1,23 @@
 {
-  "name": "Continuous Error Bars",
+  "name": "Cumulative Normalized Lines",
   "organization": "tbackes",
-  "description": "Line plot with continuous error bars, generated using plotly.js.",
+  "description": "Cumulative normalized line plot (ecdf), generated using plotly.js.",
   "logoUrl": "https://logo",
   "organizationUrl": "https://url",
   "supportUrl": "https://url",
   "privacyPolicyUrl": "https://url",
   "termsOfServiceUrl": "https://url",
   "packageUrl": "https://url",
-  "devMode": false,
+  "devMode": true,
   "components": [
     {
-      "name": "continuous-error-bars",
-      "description": "Line plot with continuous error bars.",
+      "name": "cumulative-normalized-lines",
+      "description": "Cumulative normalized line plot (ecdf).",
       "iconUrl": "https://url",
       "resource": {
-        "js": "gs://tbackes_viz/continuous-error-bars/index.js",
-        "config": "gs://tbackes_viz/continuous-error-bars/index.json",
-        "css": "gs://tbackes_viz/continuous-error-bars/index.css"
+        "js": "gs://tbackes_viz/cumulative-normalized-lines-dev/index.js",
+        "config": "gs://tbackes_viz/cumulative-normalized-lines-dev/index.json",
+        "css": "gs://tbackes_viz/cumulative-normalized-lines-dev/index.css"
       }
     }
   ]

@@ -1,7 +1,7 @@
 {
   "dsccViz": {
-    "gcsDevBucket": "gs://tbackes_viz/continuous-error-bars-dev",
-    "gcsProdBucket": "gs://tbackes_viz/continuous-error-bars",
+    "gcsDevBucket": "gs://tbackes_viz/cumulative-normalized-lines-dev",
+    "gcsProdBucket": "gs://tbackes_viz/cumulative-normalized-lines",
     "components": [
       {
         "jsFile": "index.js",
@@ -24,7 +24,7 @@
     "copy-webpack-plugin": "^4.6.0"
   },
   "dependencies": {
-    "d3": "^6.5.0",
-    "plotly.js-dist": "^1.58.4"
+    "d3": "^7.6.1",
+    "plotly.js-dist": "^2.13.1"
   }
 }
