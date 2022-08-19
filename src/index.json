@@ -14,12 +14,36 @@
           }
         },
         {
+          "id": "breakdown",
+          "label": "Breakdown Dimension",
+          "type": "DIMENSION",
+          "options": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
           "id": "metric",
           "label": "Metric",
           "type": "METRIC",
           "options": {
             "min": 1,
             "max": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "breakdownSort",
+      "label": "Sort Order",
+      "elements": [
+        {
+          "id": "breakdown_sort_order",
+          "label": "Breakdown Sort Order",
+          "type": "METRIC",
+          "options": {
+            "min": 0,
+            "max": 1
           }
         }
       ]
@@ -35,6 +59,12 @@
           "label": "Chart Title",
           "type": "TEXTINPUT",
           "defaultValue": ""
+        },
+        {
+          "id": "bottomPadding",
+          "label": "Bottom Padding",
+          "type": "TEXTINPUT",
+          "defaultValue": "50"
         }
       ]
     },
@@ -46,7 +76,7 @@
           "id": "xAxisDate",
           "label": "Is x-axis a date?",
           "type": "CHECKBOX",
-          "defaultValue": "false"
+          "defaultValue": "False"
         },
         {
           "id": "xLabel",
@@ -77,6 +107,24 @@
           "label": "Axis Title",
           "type": "TEXTINPUT",
           "defaultValue": ""
+        },
+        {
+          "id": "cumulative",
+          "label": "Plot Cumulative Values?",
+          "type": "CHECKBOX",
+          "defaultValue": "True"
+        },
+        {
+          "id": "plotTotal",
+          "label": "Add series for total population?",
+          "type": "CHECKBOX",
+          "defaultValue": "False"
+        },
+        {
+          "id": "totalName",
+          "label": "Label for total population",
+          "type": "TEXTINPUT",
+          "defaultValue": "Total"
         }
       ]
     },
@@ -88,7 +136,53 @@
           "id": "metricFormatString",
           "label": "Format String for Metrics",
           "type": "TEXTINPUT",
-          "defaultValue": ",.0f"
+          "defaultValue": ",.1%"
+        }
+      ]
+    },
+    {
+      "id": "breakdownSortStyle",
+      "label": "Breakdown Sort",
+      "elements": [
+        {
+          "id": "sortAggFunc",
+          "label": "Aggregate Function for Sort Order",
+          "type": "SELECT_RADIO",
+          "defaultValue": "avg",
+          "options": [
+            {
+              "value": "avg",
+              "label": "avg"
+            },
+            {
+              "value": "sum",
+              "label": "sum"
+            },
+            {
+              "value": "min",
+              "label": "min"
+            },
+            {
+              "value": "max",
+              "label": "max"
+            }
+          ]
+        },
+        {
+          "id": "sortAscend",
+          "label": "Sort Method",
+          "type": "SELECT_RADIO",
+          "defaultValue": "Descending",
+          "options": [
+            {
+              "value": "Descending",
+              "label": "Descending"
+            },
+            {
+              "value": "Ascending",
+              "label": "Ascending"
+            }
+          ]
         }
       ]
     },
@@ -120,7 +214,7 @@
           "id": "metricShowPoints1",
           "label": "Show Points",
           "type": "CHECKBOX",
-          "defaultValue": "false"
+          "defaultValue": "False"
         }
       ]
     }
@@ -153,7 +247,7 @@
           "id": "metricShowPoints2",
           "label": "Show Points",
           "type": "CHECKBOX",
-          "defaultValue": "false"
+          "defaultValue": "False"
         }
       ]
     }
@@ -186,7 +280,7 @@
           "id": "metricShowPoints3",
           "label": "Show Points",
           "type": "CHECKBOX",
-          "defaultValue": "false"
+          "defaultValue": "False"
         }
       ]
     }
@@ -196,7 +290,7 @@
       "label": "Metric #4",
       "elements": [
         {
-          "id": "metricGroup14",
+          "id": "metricGroup4",
           "label": "Metric Group",
           "type": "TEXTINPUT",
           "defaultValue": "Metric4"
@@ -219,7 +313,7 @@
           "id": "metricShowPoints4",
           "label": "Show Points",
           "type": "CHECKBOX",
-          "defaultValue": "false"
+          "defaultValue": "False"
         }
       ]
     }
@@ -252,7 +346,7 @@
           "id": "metricShowPoints5",
           "label": "Show Points",
           "type": "CHECKBOX",
-          "defaultValue": "false"
+          "defaultValue": "False"
         }
       ]
     }
@@ -285,7 +379,7 @@
           "id": "metricShowPoints6",
           "label": "Show Points",
           "type": "CHECKBOX",
-          "defaultValue": "false"
+          "defaultValue": "False"
         }
       ]
     }
@@ -318,7 +412,7 @@
           "id": "metricShowPoints7",
           "label": "Show Points",
           "type": "CHECKBOX",
-          "defaultValue": "false"
+          "defaultValue": "False"
         }
       ]
     }
@@ -351,7 +445,7 @@
           "id": "metricShowPoints8",
           "label": "Show Points",
           "type": "CHECKBOX",
-          "defaultValue": "false"
+          "defaultValue": "False"
         }
       ]
     }
@@ -384,7 +478,7 @@
           "id": "metricShowPoints9",
           "label": "Show Points",
           "type": "CHECKBOX",
-          "defaultValue": "false"
+          "defaultValue": "False"
         }
       ]
     }
@@ -417,7 +511,40 @@
           "id": "metricShowPoints10",
           "label": "Show Points",
           "type": "CHECKBOX",
-          "defaultValue": "false"
+          "defaultValue": "False"
+        }
+      ]
+    }
+    ,
+    {
+      "id": "metricStyles11",
+      "label": "Metric #11",
+      "elements": [
+        {
+          "id": "metricGroup11",
+          "label": "Metric Group",
+          "type": "TEXTINPUT",
+          "defaultValue": "Metric11"
+        },
+        {
+          "id": "metricLineWeight11",
+          "label": "Line Weight 11",
+          "type": "LINE_WEIGHT",
+          "defaultValue": "2"
+        },
+        {
+          "id": "metricColor11",
+          "label": "Line Color 11",
+          "type": "BORDER_COLOR",
+          "defaultValue": {
+            "color": ""
+          }
+        },
+        {
+          "id": "metricShowPoints11",
+          "label": "Show Points",
+          "type": "CHECKBOX",
+          "defaultValue": "False"
         }
       ]
     }

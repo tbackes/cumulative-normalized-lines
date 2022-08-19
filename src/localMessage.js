@@ -5,21 +5,36 @@ export const message = {
         "dimension": [
           1
         ],
+        "breakdown": [
+          'A'
+        ],
         "metric": [
-          "1.5", "4.5", "3"
+          1.5, 4.5, 3
+        ],
+        "breakdown_sort_order": [
+          1
         ]
       },
       {
         "dimension": [
           2
         ],
+        "breakdown": [
+          'A'
+        ],
         "metric": [
           1.7, 2.5, 3.4
+        ],
+        "breakdown_sort_order": [
+          1
         ]
       },
       {
         "dimension": [
           3
+        ],
+        "breakdown": [
+          'A'
         ],
         "metric": [
           1.5, 3, 3
@@ -29,24 +44,117 @@ export const message = {
         ],
         "metric_upper": [
           2.5, 4.1, 5
+        ],
+        "breakdown_sort_order": [
+          1
         ]
       },
       {
         "dimension": [
           4
         ],
+        "breakdown": [
+          'A'
+        ],
         "metric": [
           1.6
+        ],
+        "breakdown_sort_order": [
+          1
         ]
       },
       {
         "dimension": [
           5
         ],
+        "breakdown": [
+          'A'
+        ],
         "metric": [
           1.4
+        ],
+        "breakdown_sort_order": [
+          1
         ]
-      }
+      },
+
+
+      {
+        "dimension": [
+          1
+        ],
+        "breakdown": [
+          'B'
+        ],
+        "metric": [
+          4.5, 3
+        ],
+        "breakdown_sort_order": [
+          2
+        ]
+      },
+      {
+        "dimension": [
+          2
+        ],
+        "breakdown": [
+          'B'
+        ],
+        "metric": [
+          2.5, 3.4
+        ],
+        "breakdown_sort_order": [
+          2
+        ]
+      },
+      {
+        "dimension": [
+          3
+        ],
+        "breakdown": [
+          'B'
+        ],
+        "metric": [
+          3, 3
+        ],
+        "metric_lower": [
+          0.8, 2.9, 1.6
+        ],
+        "metric_upper": [
+          2.5, 4.1, 5
+        ],
+        "breakdown_sort_order": [
+          2
+        ]
+      },
+      {
+        "dimension": [
+          4
+        ],
+        "breakdown": [
+          'B'
+        ],
+        "metric": [
+          1.6
+        ],
+        "breakdown_sort_order": [
+          2
+        ]
+      },
+      {
+        "dimension": [
+          5
+        ],
+        "breakdown": [
+          'B'
+        ],
+        "metric": [
+          1.4
+        ],
+        "breakdown_sort_order": [
+          2
+        ]
+      },
     ]
   },
   "fields": {
@@ -55,6 +163,14 @@ export const message = {
         "id": "qt_a62c3nqogc",
         "name": "Index",
         "type": "NUMBER",
+        "concept": "DIMENSION"
+      }
+    ],
+    "breakdown": [
+      {
+        "id": "qt_a62c3nvvvvvc",
+        "name": "Group By",
+        "type": "TEXT",
         "concept": "DIMENSION"
       }
     ],
@@ -78,11 +194,23 @@ export const message = {
         "concept": "METRIC"
       }
     ],
+    "breakdown_sort_order": [
+      {
+        "id": "djlkjsjfjjf",
+        "name": "Sort Order",
+        "type": "NUMBER",
+        "concept": "METRIC"
+      }
+    ]
   },
   "style": {
     "chartTitle": {
       "value": "This is the title<br>Try multiline",
       "defaultValue": ""
+    },
+    "bottomPadding": {
+      "value": "100",
+      "defaultValue": "50"
     },
     "xAxisDate": {
       "value": false,
@@ -103,6 +231,26 @@ export const message = {
     "yLabel": {
       "value": "Test Label",
       "defaultValue": null
+    },
+    "cumulative": {
+      "value": true,
+      "defaultValue": true
+    },
+    "plotTotal": {
+      "value": true,
+      "defaultValue": false
+    },
+    "totalName": {
+      "value": "Test Value",
+      "defaultValue": "Total"
+    },
+    "sortAggFunc": {
+      "value": "max",
+      "defaultValue": "avg"
+    },
+    "sortAscend": {
+      "value": "Ascending",
+      "defaultValue": "Descending"
     },
     "metricFormatString": {
       "value": ".3%",

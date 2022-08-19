@@ -1,5 +1,5 @@
 {
-  "name": "Cumulative Normalized Lines",
+  "name": "Cumulative Distribution",
   "organization": "tbackes",
   "description": "Cumulative normalized line plot (ecdf), generated using plotly.js.",
   "logoUrl": "https://logo",
@@ -11,7 +11,7 @@
   "devMode": "DEVMODE_BOOL",
   "components": [
     {
-      "name": "cumulative-normalized-lines",
+      "name": "Cumulative Distribution",
       "description": "Cumulative normalized line plot (ecdf).",
       "iconUrl": "https://url",
       "resource": {
