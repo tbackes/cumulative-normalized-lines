@@ -147,18 +147,6 @@ const getAggSortOrder = (aggFunc, sortAscend, message, groupName, sortName) => {
   return sortedGroups
 };
 
-// const getTotalGroupYData = (data) =>{
-//   const out = data.reduce((a, e) => 
-//     // iterate each object entry as [key, value] and use "a" as accumulator
-//     Object.entries(e).reduce((a, t) => {
-//         // create an empty array on "a" for each key (if it does not exist yet)
-//         // then push current value to it
-//         a[t[0]] = (a[t[0]] || 0) + t[1];
-//         return a;
-//     }, a), {});
-//   return out;
-// }
-
 const drawViz = message => {
 
   // set margins + canvas size
@@ -303,11 +291,19 @@ const drawViz = message => {
         name = totalName;
       }
       else{
-        xData = xAxisDate && isDate(toDate(message.tables.DEFAULT[0].dimension[0]))
-          ? message.tables.DEFAULT.filter(d => d.breakdown[0]===breakdown_values[i]).map(d => toDate(d.dimension[0])) 
-          : message.tables.DEFAULT.filter(d => d.breakdown[0]===breakdown_values[i]).map(d => d.dimension[0]);
+        // xData = xAxisDate && isDate(toDate(message.tables.DEFAULT[0].dimension[0]))
+        //   ? message.tables.DEFAULT.filter(d => d.breakdown[0]===breakdown_values[i]).map(d => toDate(d.dimension[0])) 
+        //   : message.tables.DEFAULT.filter(d => d.breakdown[0]===breakdown_values[i]).map(d => d.dimension[0]);
 
-        yData = message.tables.DEFAULT.filter(d => d.breakdown[0]===breakdown_values[i]).map(d => Number(d.metric[0]));
+        // yData = message.tables.DEFAULT.filter(d => d.breakdown[0]===breakdown_values[i]).map(d => Number(d.metric[0]));
+        // name = breakdown_values[i];
+
+        totalData = groupBy(message.tables.DEFAULT, 'dimension', (red, x) => {
+            x.breakdown[0]===breakdown_values[i]
+              ? return red + nullToZero(Number(x.metric[0]))
+              : return red + 0}, 0);
+        xData = Object.keys(totalData);
+        yData = Object.values(totalData);
         name = breakdown_values[i];
       }
 

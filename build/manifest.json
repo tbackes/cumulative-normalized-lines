@@ -1,5 +1,5 @@
 {
-  "name": "Cumulative Distribution",
+  "name": "CDF - Dev",
   "organization": "tbackes",
   "description": "Cumulative normalized line plot (ecdf), generated using plotly.js.",
   "logoUrl": "https://logo",
@@ -8,16 +8,16 @@
   "privacyPolicyUrl": "https://url",
   "termsOfServiceUrl": "https://url",
   "packageUrl": "https://url",
-  "devMode": false,
+  "devMode": true,
   "components": [
     {
-      "name": "Cumulative Distribution",
+      "name": "cdf-dev",
       "description": "Cumulative normalized line plot (ecdf).",
       "iconUrl": "https://url",
       "resource": {
-        "js": "gs://tbackes_viz/cumulative-normalized-lines/index.js",
-        "config": "gs://tbackes_viz/cumulative-normalized-lines/index.json",
-        "css": "gs://tbackes_viz/cumulative-normalized-lines/index.css"
+        "js": "gs://tbackes_viz/cumulative-normalized-lines-dev/index.js",
+        "config": "gs://tbackes_viz/cumulative-normalized-lines-dev/index.json",
+        "css": "gs://tbackes_viz/cumulative-normalized-lines-dev/index.css"
       }
     }
   ]
